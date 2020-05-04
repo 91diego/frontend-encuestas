@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EncuestasService } from './../services/encuestas.service';
+import { PreguntasService } from './../services/preguntas.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,15 +14,20 @@ export class CrearEncuestaComponent implements OnInit {
   // GRUPO DE CONTROLES PARA LOS FORMULARIOS
   formEncuesta: FormGroup;
   formPreguntas: FormGroup;
+  // ID DE LA ENCUESTA CREADA
+  idEncuesta;
 
   constructor(private formBuilder: FormBuilder,
-    private encuestasService: EncuestasService) {
+              private encuestasService: EncuestasService,
+              private preguntasService: PreguntasService
+    ) {
 
     this.buildForm();
   }
 
   ngOnInit() {
     this.encuestas();
+    this.preguntas();
   }
 
   // GUARDA LOS DATOS GENERALES DE LA ENCUESTA
@@ -36,7 +42,7 @@ export class CrearEncuestaComponent implements OnInit {
       .subscribe(
         encuesta => {
           console.log(encuesta);
-          environment.id_encuesta = encuesta;
+          this.idEncuesta = encuesta;
         });
       console.log('Los datos generales de la encuesta han sido guardados');
     }
@@ -46,15 +52,22 @@ export class CrearEncuestaComponent implements OnInit {
   guardarPregunta(event: Event) {
 
     event.preventDefault();
+    // ASIGNAMOS EL VALOR DE LA ENCUESTA
+    this.formPreguntas.get('encuesta_id').setValue(this.idEncuesta);
     console.log(this.formPreguntas.value);
 
     // VALIDACION DEL FORMULARIO PARA GUARDAR DATOS
     if(this.formPreguntas.valid) {
-
-      console.log('La pregunta ha sido asociada a la encuesta con id ' + environment.id_encuesta);
+      this.preguntasService.crearPreguntas(this.formPreguntas.value)
+      .subscribe(pregunta => {
+        console.log(pregunta);
+        this.preguntas();
+      });
+      console.log('La pregunta ha sido asociada a la encuesta con id ' + this.idEncuesta);
     }
   }
 
+  // MUESTRA EL LISTADO DE LAS ENCUESTAS
   encuestas() {
 
     this.encuestasService.obtenerEncuestas().subscribe(
@@ -62,6 +75,15 @@ export class CrearEncuestaComponent implements OnInit {
         console.log(data);
       }
     );
+  }
+
+  // MUESTRA EL LISTADO DE PREGUNTAS
+  preguntas() {
+
+    this.preguntasService.obtenerPreguntas(this.idEncuesta)
+    .subscribe(data => {
+      console.log(data);
+    });
   }
 
   // CREA EL GRUPO DE CONTROLES PARA LOS FORMULARIOS
@@ -77,7 +99,8 @@ export class CrearEncuestaComponent implements OnInit {
     this.formPreguntas = this.formBuilder.group({
 
       pregunta: ['', [Validators.required]],
-      multiple: [false]
+      multiple: [false],
+      encuesta_id: 0
     });
 
   }

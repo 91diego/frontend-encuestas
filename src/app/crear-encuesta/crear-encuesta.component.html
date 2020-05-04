@@ -1,8 +1,7 @@
 <div class="container">
     <br>
-
-    <div id="datos-generales">
-        <div class="shadow p-4 mb-4 bg-white">
+    <div class="card shadow p-4 mb-4 bg-white" id="datos-generales">
+        <div class="card-body">
             <h3>Datos generales de la encuesta</h3>
             <form [formGroup]="formEncuesta" (ngSubmit)="guardarNombreEncuesta($event)">
                 <div class="form-group">
@@ -27,10 +26,11 @@
                         <option value="Entrega">Entrega</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <button [disabled]="formEncuesta.invalid" class="btn btn-primary" type="submit">Guardar</button>
+                <div class="row">
+                    <a routerLink="/home" class="btn btn-primary active" role="button" type="button">Salir</a>&nbsp;
+                    <button [disabled]="formEncuesta.invalid" class="btn btn-primary" type="submit">Continuar</button>
                 </div>
-            </form>        
+            </form>
         </div>
     </div>
 
@@ -43,7 +43,7 @@
                     <form [formGroup]="formPreguntas" (ngSubmit)="guardarPregunta($event)">
                         <div class="form-group">
                           <label for="pregunta"><strong>Pregunta</strong></label>
-                          <input formControlName="pregunta" type="text" class="form-control" placeholder="Escribe aqui tu pregunta" id="pregunta">
+                          <input formControlName="pregunta" type="text" class="form-control" placeholder="Escribe aquí tu pregunta" id="pregunta">
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
