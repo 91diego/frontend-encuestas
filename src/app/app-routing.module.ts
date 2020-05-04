@@ -5,7 +5,6 @@ import { EditarEncuestaComponent } from './editar-encuesta/editar-encuesta.compo
 import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './home/home.component';
 
-
 const routes: Routes = [
   {
     path: '',

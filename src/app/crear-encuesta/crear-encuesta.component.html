@@ -1,1 +1,68 @@
-<p>crear-encuesta works!</p>
+<div class="container">
+    <br>
+
+    <div id="datos-generales">
+        <div class="shadow p-4 mb-4 bg-white">
+            <h3>Datos generales de la encuesta</h3>
+            <form [formGroup]="formEncuesta" (ngSubmit)="guardarNombreEncuesta($event)">
+                <div class="form-group">
+                  <label for="encuesta"><strong>Nombre de la encuesta</strong></label>
+                  <input formControlName="encuesta" type="text" class="form-control" placeholder="Escribe el nombre de la encuesta" id="encuesta">
+                </div>
+                <div class="form-group">
+                  <label for="desarrollo"><strong>Desarrollo</strong></label>
+                  <select formControlName="desarrollo" name="cars" class="custom-select" id="desarrollo">
+                      <option value="" selected>Selecciona una opcion del menu</option>
+                      <option value="Anuva">Anuva</option>
+                      <option value="Liva">Liva</option>
+                      <option value="Brasilia">Brasilia</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <label for="fase"><strong>Fase</strong></label>
+                    <select formControlName="fase" name="cars" class="custom-select" id="fase">
+                        <option value="" selected>Selecciona una opcion del menu</option>
+                        <option value="Contrato">Contrato</option>
+                        <option value="Escritura">Escritura</option>
+                        <option value="Entrega">Entrega</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="formEncuesta.invalid" class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+            </form>        
+        </div>
+    </div>
+
+    <div id="asignacion-preguntas">
+        <div class="shadow p-4 mb-4 bg-white">
+            <h3>Asignacion de preguntas</h3>
+
+            <div class="row">
+                <div class="col">
+                    <form [formGroup]="formPreguntas" (ngSubmit)="guardarPregunta($event)">
+                        <div class="form-group">
+                          <label for="pregunta"><strong>Pregunta</strong></label>
+                          <input formControlName="pregunta" type="text" class="form-control" placeholder="Escribe aqui tu pregunta" id="pregunta">
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input formControlName="multiple" type="checkbox" class="custom-control-input" id="multiple">
+                                <label class="custom-control-label" for="multiple">Opcion multiple</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button [disabled]="formPreguntas.invalid" type="submit" class="btn btn-outline-success">Agregar pregunta</button>&nbsp;
+                            <button [disabled]="formPreguntas.invalid" type="submit" class="btn btn-outline-info">Finalizar asignación</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                    <p>Se obtienen las preguntas asociadas a la encuesta</p>
+                    <p>En esta seccion todas las preguntas podran ser editadas o eliminadas de la encuesta</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
