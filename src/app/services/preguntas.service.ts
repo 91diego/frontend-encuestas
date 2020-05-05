@@ -11,7 +11,7 @@ export class PreguntasService {
 
   obtenerPreguntas(id: any) {
 
-    return this.httpClient.get(environment.url_api + 'pregunta', id);
+    return this.httpClient.get(environment.url_api + 'pregunta/' + id);
   }
 
   crearPreguntas(pregunta: any) {

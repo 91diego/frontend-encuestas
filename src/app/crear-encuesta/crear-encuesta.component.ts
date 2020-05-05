@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EncuestasService } from './../services/encuestas.service';
 import { PreguntasService } from './../services/preguntas.service';
 import { environment } from 'src/environments/environment';
+import { Preguntas } from './../interfaces/preguntas';
 
 @Component({
   selector: 'app-crear-encuesta',
@@ -16,6 +17,7 @@ export class CrearEncuestaComponent implements OnInit {
   formPreguntas: FormGroup;
   // ID DE LA ENCUESTA CREADA
   idEncuesta;
+  pregunta: Preguntas[];
 
   constructor(private formBuilder: FormBuilder,
               private encuestasService: EncuestasService,
@@ -25,10 +27,7 @@ export class CrearEncuestaComponent implements OnInit {
     this.buildForm();
   }
 
-  ngOnInit() {
-    this.encuestas();
-    this.preguntas();
-  }
+  ngOnInit() {}
 
   // GUARDA LOS DATOS GENERALES DE LA ENCUESTA
   guardarNombreEncuesta(event: Event) {
@@ -81,8 +80,11 @@ export class CrearEncuestaComponent implements OnInit {
   preguntas() {
 
     this.preguntasService.obtenerPreguntas(this.idEncuesta)
-    .subscribe(data => {
-      console.log(data);
+    .subscribe((data: Preguntas[]) => {
+
+      this.pregunta = data;
+      console.log('Pregunta registrada');
+      console.log(this.pregunta);
     });
   }
 
