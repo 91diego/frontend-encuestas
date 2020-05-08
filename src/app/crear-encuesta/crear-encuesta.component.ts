@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EncuestasService } from './../services/encuestas.service';
 import { PreguntasService } from './../services/preguntas.service';
+import { FasesService } from './../services/fases.service';
+import { MedicionesService } from './../services/mediciones.service';
 import { environment } from 'src/environments/environment';
 import { Preguntas } from './../interfaces/preguntas';
+import { Fases } from '../interfaces/fases';
+import { Mediciones } from '../interfaces/mediciones';
 
 @Component({
   selector: 'app-crear-encuesta',
@@ -18,22 +22,32 @@ export class CrearEncuestaComponent implements OnInit {
   // ID DE LA ENCUESTA CREADA
   idEncuesta;
   pregunta: Preguntas[];
+  nombreFases: Fases[];
+  nombreMediciones: Mediciones[];
 
   constructor(private formBuilder: FormBuilder,
               private encuestasService: EncuestasService,
-              private preguntasService: PreguntasService
+              private preguntasService: PreguntasService,
+              private fasesService: FasesService,
+              private medicionesServices: MedicionesService
     ) {
-
     this.buildForm();
+    console.log(this.formEncuesta.get('fase').value);
+    this.formEncuesta.get('fase').valueChanges
+    .subscribe(value => {
+      this.cambioFase(value);
+    })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.fases();
+  }
 
   // GUARDA LOS DATOS GENERALES DE LA ENCUESTA
   guardarNombreEncuesta(event: Event) {
 
     event.preventDefault();
-    console.log(this.formEncuesta.value);
 
     if (this.formEncuesta.valid) {
 
@@ -57,6 +71,7 @@ export class CrearEncuestaComponent implements OnInit {
 
     // VALIDACION DEL FORMULARIO PARA GUARDAR DATOS
     if(this.formPreguntas.valid) {
+
       this.preguntasService.crearPreguntas(this.formPreguntas.value)
       .subscribe(pregunta => {
         console.log(pregunta);
@@ -76,6 +91,18 @@ export class CrearEncuestaComponent implements OnInit {
     );
   }
 
+  // MUESTRA EL LISTADO DE LAS FASES DISPONIBLES
+  fases() {
+
+    this.fasesService.obtenerfases()
+    .subscribe((data: Fases[]) => {
+
+      this.nombreFases = data;
+      console.log('Fases');
+      console.log(this.nombreFases);
+    });
+  }
+
   // MUESTRA EL LISTADO DE PREGUNTAS
   preguntas() {
 
@@ -85,6 +112,20 @@ export class CrearEncuestaComponent implements OnInit {
       this.pregunta = data;
       console.log('Pregunta registrada');
       console.log(this.pregunta);
+    });
+    this.reiniciarFormPreguntas();
+  }
+
+  // DETECTA EL CAMBIO DE LA FASE
+  cambioFase(id: any) {
+
+    console.log(id);
+    this.medicionesServices.obtenerMediciones(id)
+    .subscribe((data: Mediciones[]) => {
+
+      this.nombreMediciones = data;
+      console.log('Mediciones asociadas a la fase');
+      console.log(this.nombreMediciones);
     });
   }
 
@@ -102,9 +143,22 @@ export class CrearEncuestaComponent implements OnInit {
 
       pregunta: ['', [Validators.required]],
       multiple: [false],
+      medicion: ['', [Validators.required]],
       encuesta_id: 0
     });
 
+  }
+
+  // RESETEA EL VALOR DEL FORMULARIO PARA LAS PREGUNTAS
+  private reiniciarFormPreguntas() {
+
+    this.formPreguntas = this.formBuilder.group({
+
+      pregunta: ['', [Validators.required]],
+      multiple: [false],
+      medicion: ['', [Validators.required]],
+      encuesta_id: this.idEncuesta
+    });
   }
 
 }

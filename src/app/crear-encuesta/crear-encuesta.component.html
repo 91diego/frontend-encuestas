@@ -20,10 +20,7 @@
                 <div class="form-group">
                     <label for="fase"><strong>Fase</strong></label>
                     <select formControlName="fase" name="cars" class="custom-select" id="fase">
-                        <option value="" selected>Selecciona una opcion del menu</option>
-                        <option value="Contrato">Contrato</option>
-                        <option value="Escritura">Escritura</option>
-                        <option value="Entrega">Entrega</option>
+                        <option *ngFor="let fase of nombreFases" value="{{fase.id}}" selected>{{fase.nombre}}</option>
                     </select>
                 </div>
                 <div class="row">
@@ -44,6 +41,12 @@
                         <div class="form-group">
                           <label for="pregunta"><strong>Pregunta</strong></label>
                           <input formControlName="pregunta" type="text" class="form-control" placeholder="Escribe aquí tu pregunta" id="pregunta">
+                        </div>
+                        <div class="form-group">
+                            <label for="fase"><strong>Medicion</strong></label>
+                            <select formControlName="medicion" name="cars" class="custom-select" id="fase">
+                                <option *ngFor="let mediciones of nombreMediciones" value="{{mediciones.id}}">{{mediciones.nombre}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
@@ -83,7 +86,7 @@
                                         <input type="checkbox" class="custom-control-input" readonly value="{{p.multiple}}">
                                     </td>
                                     <td>
-                                        <button (click)="editarPiso(p.id)" type="button" id="btn_editar_piso{{p.id}}" class="btn btn-outline-warning">Editar</button>
+                                        <!-- <button (click)="editarPiso(p.id)" type="button" id="btn_editar_piso{{p.id}}" class="btn btn-outline-warning">Editar</button> -->
                                         <!--<div id="botones_pisos_{{piso.id}}" style="display: none;">
                                             <button (click)="guardarCambios(piso.id)" type="button" id="btn_guardar_piso{{piso.id}}" class="btn btn-outline-success">Guardar</button>
                                             <button (click)="cancelarCambios(piso.id)" type="button" id="btn_cancelar_piso{{piso.id}}" class="btn btn-outline-danger">Cancelar</button>
