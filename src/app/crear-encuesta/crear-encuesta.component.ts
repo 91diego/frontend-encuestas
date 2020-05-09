@@ -31,12 +31,20 @@ export class CrearEncuestaComponent implements OnInit {
               private fasesService: FasesService,
               private medicionesServices: MedicionesService
     ) {
-    this.buildForm();
-    console.log(this.formEncuesta.get('fase').value);
-    this.formEncuesta.get('fase').valueChanges
-    .subscribe(value => {
-      this.cambioFase(value);
-    })
+      // INICIALIZAMOS LOS FORMULARIOS DE LA FUNCION
+      this.buildForm();
+      console.log(this.formEncuesta.get('fase').value);
+
+      // DETECTAMOS EL CAMBIO EN EL SELECT FASE
+      // EL CUAL DISPARARA LA FUNCION QUE CAMBIA
+      // LAS OPCIONES DE LA MEDICION AL CREAR LA PREGUNTA
+      this.formEncuesta.get('fase').valueChanges
+      .subscribe(value => {
+        this.cambioFase(value);
+      });
+
+      // DESHABILITAMOS EL FORMULARIO PREGUNTAS
+      this.formPreguntas.disable();
   }
 
   ngOnInit() {
@@ -56,8 +64,11 @@ export class CrearEncuestaComponent implements OnInit {
         encuesta => {
           console.log(encuesta);
           this.idEncuesta = encuesta;
-        });
-      console.log('Los datos generales de la encuesta han sido guardados');
+          this.formPreguntas.enable();
+          this.formEncuesta.disable();
+          console.log('Los datos generales de la encuesta han sido guardados');
+        }
+      );
     }
   }
 
