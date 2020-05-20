@@ -4,6 +4,7 @@ import { CrearEncuestaComponent } from './crear-encuesta/crear-encuesta.componen
 import { EditarEncuestaComponent } from './editar-encuesta/editar-encuesta.component';
 import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './home/home.component';
+import { DetallesEncuestaComponent } from './detalles-encuesta/detalles-encuesta.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'editar-encuesta',
         component: EditarEncuestaComponent
+      },
+      {
+        path: 'editar-encuesta/detalles/:id',
+        component: DetallesEncuestaComponent
       }
     ]
   }

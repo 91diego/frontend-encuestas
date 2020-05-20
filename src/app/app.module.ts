@@ -15,6 +15,7 @@ import { MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule, MatSortModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DetallesEncuestaComponent } from './detalles-encuesta/detalles-encuesta.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     EditarEncuestaComponent,
     MenuComponent,
     HomeComponent,
+    DetallesEncuestaComponent,
   ],
   imports: [
     BrowserModule,

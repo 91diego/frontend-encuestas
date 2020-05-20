@@ -11,7 +11,7 @@ export class EncuestasService {
 
   obtenerEncuestas() {
 
-    return this.httpClient.get(environment.url_api + 'encuesta');
+    return this.httpClient.get(environment.url_api + 'encuestas');
   }
 
   crearEncuesta(encuesta: any) {
