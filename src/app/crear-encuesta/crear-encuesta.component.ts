@@ -81,7 +81,7 @@ export class CrearEncuestaComponent implements OnInit {
     console.log(this.formPreguntas.value);
 
     // VALIDACION DEL FORMULARIO PARA GUARDAR DATOS
-    if(this.formPreguntas.valid) {
+    if (this.formPreguntas.valid) {
 
       this.preguntasService.crearPreguntas(this.formPreguntas.value)
       .subscribe(pregunta => {

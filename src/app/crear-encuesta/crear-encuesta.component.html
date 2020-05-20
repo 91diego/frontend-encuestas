@@ -60,27 +60,47 @@
                         </div>
                     </form>
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="col">
+                    <br>
                     <div *ngIf="pregunta == null">
-                        <p>Sin preguntas asociadas a la encuesta</p>
+                        <h3 class="text-center text-info text-uppercase">Sin preguntas asociadas a la encuesta</h3>
                     </div>
-                    <div *ngIf="pregunta != null">
-                        <div *ngFor="let p of pregunta">
-                            <form class="form-inline" action="/action_page.php">
-                                <label for="pregunta{{p.numero}}">{{p.descripcion}}</label>
-                                <!-- <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"> -->
-                                <label for="opcion_multiple{{p.numero}}">{{p.multiple}}</label>
-                                <!-- input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd"> -->
-                                <label for="medicion{{p.numero}}">{{p.medicion_id}}</label>
-                                <div class="form-check">
-                                  <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="remember"> Editar
-                                  </label>
-                                </div>&nbsp;
-                                <button type="button" class="btn btn-primary">Guardar</button>
-                            </form>
-                        </div>
+                    <div *ngIf="pregunta != null" class="table-responsive">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Pregunta</th>
+                                    <th>Opción Múltiple</th>
+                                    <th>Medición</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let p of pregunta" class="text-center">
+                                    <td>{{p.descripcion}}</td>
+                                    <div *ngIf="p.multiple">
+                                        <td>SI</td>
+                                    </div>
+                                    <div *ngIf="!p.multiple">
+                                        <td>NO</td>
+                                    </div>
+                                    <td>{{p.nombre}}</td>
+                                    <td>
+                                        <div class="custom-control custom-checkbox mb-3">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                                            <label class="custom-control-label" for="customCheck">Editar</label>
+                                        </div>
+                                        <button class="btn btn-outline-success">Guardar</button>&nbsp;
+                                        <button class="btn btn-outline-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
             </div>
 

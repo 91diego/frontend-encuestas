@@ -1,1 +1,65 @@
-<p>home works!</p>
+<div class="container">
+    <br>
+    <div class="card shadow p-4 mb-4 bg-white" id="datos-generales">
+        <div class="card-body">
+            <h3 class="text-center">Estatus de las encuestas</h3>
+            <br>
+            <mat-form-field>
+              <mat-label>Buscar</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ej: Evaluacion Asesor">
+            </mat-form-field>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+              
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef> Encuesta</th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="desarrollo">
+                    <th mat-header-cell *matHeaderCellDef> Cliente</th>
+                    <td mat-cell *matCellDef="let element"> {{element.desarrollo}} </td>
+                  </ng-container>
+              
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="estatus_envio">
+                    <th mat-header-cell *matHeaderCellDef> Estatus del envio</th>
+                    <td mat-cell *matCellDef="let element"> {{element.estatus_envio}} </td>
+                  </ng-container>
+              
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="fecha_envio">
+                    <th mat-header-cell *matHeaderCellDef> Fecha del envio</th>
+                    <td mat-cell *matCellDef="let element"> {{element.fecha_envio}} </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="numero_envios">
+                    <th mat-header-cell *matHeaderCellDef> Numero de envios</th>
+                    <td mat-cell *matCellDef="let element"> {{element.numero_envios}} </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="estatus_respuesta">
+                    <th mat-header-cell *matHeaderCellDef> Estatus de respuesta</th>
+                    <td mat-cell *matCellDef="let element"> {{element.estatus_respuesta}} </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="fecha_respuesta">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de respuesta</th>
+                    <td mat-cell *matCellDef="let element"> {{element.fecha_respuesta}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>                       
+              
+        </div>
+    </div>
+</div>
