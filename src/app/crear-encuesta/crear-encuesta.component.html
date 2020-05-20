@@ -71,31 +71,22 @@
                     <div *ngIf="pregunta != null" class="table-responsive">
                         <table class="table table-hover table-sm">
                             <thead>
-                                <tr class="text-center">
-                                    <th>Pregunta</th>
-                                    <th>Opción Múltiple</th>
-                                    <th>Medición</th>
-                                    <th>Editar</th>
+                                <tr>
+                                    <th class="text-center">Pregunta</th>
+                                    <th class="text-center">Opción Múltiple</th>
+                                    <th class="text-center">Medición</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let p of pregunta" class="text-center">
-                                    <td>{{p.descripcion}}</td>
+                                <tr *ngFor="let p of pregunta">
+                                    <td class="text-center">{{p.descripcion}}</td>
                                     <div *ngIf="p.multiple">
-                                        <td>SI</td>
+                                        <td class="text-center">SI</td>
                                     </div>
                                     <div *ngIf="!p.multiple">
-                                        <td>NO</td>
+                                        <td class="text-center">NO</td>
                                     </div>
-                                    <td>{{p.nombre}}</td>
-                                    <td>
-                                        <div class="custom-control custom-checkbox mb-3">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                                            <label class="custom-control-label" for="customCheck">Editar</label>
-                                        </div>
-                                        <button class="btn btn-outline-success">Guardar</button>&nbsp;
-                                        <button class="btn btn-outline-danger">Eliminar</button>
-                                    </td>
+                                    <td class="text-center">{{p.medicion}}</td>
                                 </tr>
                             </tbody>
                         </table>

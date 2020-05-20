@@ -1,7 +1,7 @@
 export interface Preguntas {
 
     // ATRIBUTOS DE LA INTERFAZ
-    id?: number;
+    /*id?: number;
     numero: number;
     descripcion: string;
     multiple: boolean;
@@ -9,5 +9,11 @@ export interface Preguntas {
     nombre: string;
     encuesta_id: number;
     created_at?: string;
-    updated_at?: string;
+    updated_at?: string;*/
+
+    id?: number;
+    numero: number;
+    descripcion: string;
+    multiple: number;
+    medicion: string;
 }

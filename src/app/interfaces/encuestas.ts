@@ -5,6 +5,4 @@ export interface Encuestas {
         encuesta: string;
         desarrollo: string;
         fase: string;
-        created_at?: string;
-        updated_at?: string;
 }
