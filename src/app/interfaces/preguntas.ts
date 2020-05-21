@@ -16,4 +16,5 @@ export interface Preguntas {
     descripcion: string;
     multiple: number;
     medicion: string;
+    medicionId: number;
 }
