@@ -2,8 +2,9 @@
     <br>
     <div class="card shadow p-4 mb-4 bg-white" id="datos-generales">
         <div class="card-body">
-            <h3 class="text-center">Encuesta</h3>
+            <h3 class="text-center">Encuesta {{nombreEncuesta}}</h3>
         </div>
+        <!-- EDICION DE PREGUNTAS -->
         <div class="row">
             <div class="col">
                 <div *ngIf="preguntasEncuesta == null">
@@ -32,8 +33,44 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
+        <!-- FIN EDICION PREGUNTAS -->
+
+        <!-- AGREGAR PREGUNTA A LA ENCUESTA -->
+        <div class="row">
+            <div class="col">
+                <div class="shadow p-4 mb-4 bg-white">
+                    <h3>Agregar preguntas</h3>
+        
+                    <div class="row">
+                        <div class="col">
+                            <form [formGroup]="formAgregar" (ngSubmit)="guardarPregunta($event)">
+                                <div class="form-group">
+                                  <label for="pregunta"><strong>Pregunta</strong></label>
+                                  <input formControlName="pregunta" type="text" class="form-control" placeholder="Escribe aquí tu pregunta" id="pregunta">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fase"><strong>Medicion</strong></label>
+                                    <select formControlName="medicion" name="fase" class="custom-select" id="fase">
+                                        <option *ngFor="let medicion of mediciones" value="{{medicion.id}}">{{medicion.nombre}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input formControlName="multiple" type="checkbox" class="custom-control-input" id="multiple">
+                                        <label class="custom-control-label" for="multiple">Opcion multiple</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <button [disabled]="formAgregar.invalid" type="submit" class="btn btn-outline-success">Agregar pregunta</button>&nbsp;
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIN AGREGAR PREGUNTA A LA ENCUESTA -->
     </div>
 </div>

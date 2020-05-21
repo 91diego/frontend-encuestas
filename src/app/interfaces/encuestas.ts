@@ -5,4 +5,5 @@ export interface Encuestas {
         encuesta: string;
         desarrollo: string;
         fase: string;
+        idFase: any;
 }
