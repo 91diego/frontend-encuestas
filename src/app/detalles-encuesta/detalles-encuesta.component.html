@@ -21,14 +21,44 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let pregunta of preguntasEncuesta">
-                                <td>{{pregunta.descripcion}}</td>
-                                <div *ngIf="pregunta.multiple">
-                                    <td class="text-center">SI</td>
-                                </div>
-                                <div *ngIf="!pregunta.multiple">
-                                    <td class="text-center">NO</td>
-                                </div>
-                                <td class="text-center">{{pregunta.medicion}}</td>
+                                <td>
+                                    <form [formGroup]="formEditarDescripcion" (ngModelChange)="cambiar($event)">
+                                        <input formControlName="idPregunta" type="text" class="form-control" value="{{pregunta.id}}" style="display: none;">
+                                        <input formControlName="descripcion" type="text" class="form-control" value="{{pregunta.descripcion}}">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form>
+                                        <input type="text" class="form-control" value="{{pregunta.id}}" style="display: none;">
+                                        <div *ngIf="pregunta.multiple">
+                                            <select class="custom-select" id="inputGroupSelect01">
+                                                <option selected value="{{pregunta.multiple}}">SI</option>
+                                                <option value="0">NO</option>
+                                            </select>
+                                        </div>
+                                        <div *ngIf="!pregunta.multiple">
+                                            <select class="custom-select" id="inputGroupSelect01">
+                                                <option selected value="{{pregunta.multiple}}">NO</option>
+                                                <option value="1">SI</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>{{pregunta.medicion}}</label>
+                                        </div>
+                                        <div class="col">
+                                            <form>
+                                                <input type="text" class="form-control" value="{{pregunta.id}}" style="display: none;">
+                                                <select class="custom-select">
+                                                    <option *ngFor="let medicion of mediciones" value="{{medicion.id}}">{{medicion.nombre}}</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

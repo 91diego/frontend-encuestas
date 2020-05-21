@@ -28,8 +28,13 @@ export class DetallesEncuestaComponent implements OnInit {
   preguntasEncuesta: Preguntas[];
   mediciones: Mediciones[];
 
-  // GRUPO DE CONTROLES PARA LOS FORMULARIOS
-  formEditar: FormGroup;
+  // FORMULARIO PARA EDITAR LA DESCRIPCION DE LA PREGUNTA
+  formEditarDescripcion: FormGroup;
+  // FORMULARIO PARA EDITAR LA OPCION MULTIPLE DE LA PREGUNTA
+  formEditarMultiple: FormGroup;
+  // FORMULARIO PARA EDITAR LA MEDICION DE LA PREGUNTA
+  formEditarMedicion: FormGroup;
+  // FORMULARIO PARA AGREGAR PREGUNTA
   formAgregar: FormGroup;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -45,6 +50,13 @@ export class DetallesEncuestaComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params.id;
     this.encuesta(this.id);
     this.preguntas(this.id);
+  }
+
+  // GUARDA LA PREGUNTA ASOCIADA A LA ENCUESTA
+  cambiar(event: Event) {
+
+    event.preventDefault();
+    console.log(this.formEditarDescripcion.value);
   }
 
   // GUARDA LA PREGUNTA ASOCIADA A LA ENCUESTA
@@ -122,11 +134,16 @@ export class DetallesEncuestaComponent implements OnInit {
   // CREA EL GRUPO DE CONTROLES PARA LOS FORMULARIOS
   private buildForm() {
 
-    this.formEditar = this.formBuilder.group({
+    this.formEditarDescripcion = this.formBuilder.group({
 
-      encuesta: ['', [Validators.required]],
-      desarrollo: ['', [Validators.required]],
-      fase: ['', [Validators.required]]
+      descripcion: [[Validators.required]],
+      idPregunta: [[Validators.required]]
+    });
+
+    this.formEditarMultiple = this.formBuilder.group({
+
+      multipleOpcion: [[Validators.required]],
+      idPregunta: [[Validators.required]]
     });
 
     this.formAgregar = this.formBuilder.group({
