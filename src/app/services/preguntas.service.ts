@@ -15,9 +15,22 @@ export class PreguntasService {
     return this.httpClient.get(environment.url_api + 'pregunta/' + id);
   }
 
+  // OBTIENE LAS PREGUNTA PREGUNTA POR SU ID
+  detallePregunta(id: any) {
+
+    return this.httpClient.get(environment.url_api + 'pregunta/mostrar/' + id);
+  }
+
   // CREA EL REGISTRO DE LA PREGUNTA
   crearPreguntas(pregunta: any) {
 
     return this.httpClient.post(environment.url_api + 'pregunta', pregunta);
+  }
+
+  // EDITA LA PREGUNTA
+  editarPregunta(id: any, pregunta: any) {
+
+    console.log('ID FRONTEND: ' + id);
+    return this.httpClient.put(environment.url_api + 'pregunta/' + id, pregunta);
   }
 }
