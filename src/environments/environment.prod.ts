@@ -13,3 +13,8 @@ export const environment = {
   }
 
 }
+
+export let empleado = {
+
+  empleadoId: ''
+};

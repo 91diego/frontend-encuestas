@@ -58,7 +58,7 @@ export class CrearEncuestaComponent implements OnInit {
     event.preventDefault();
 
     if (this.formEncuesta.valid) {
-
+      console.log(this.formEncuesta.value);
       this.encuestasService.crearEncuesta(this.formEncuesta.value)
       .subscribe(
         encuesta => {

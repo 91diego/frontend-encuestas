@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { empleado } from './../../environments/environment';
 
 @Component({
   selector: 'app-layout',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activateRoute: ActivatedRoute) { 
+
+    empleado.empleadoId =  this.activateRoute.snapshot.paramMap.get('empleado');
+    console.log(empleado.empleadoId);
+  }
 
   ngOnInit() {
   }

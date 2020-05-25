@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material';
 
 import { Envios } from '../interfaces/envios';
 import { EnviosService } from './../services/envios.service';
-
-
+import { empleado } from './../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +15,7 @@ import { EnviosService } from './../services/envios.service';
 })
 export class HomeComponent implements OnInit {
 
+  empleadoId;
   datos: Envios[];
   displayedColumns: string[] = ['nombre', 'desarrollo', 'estatus_envio', 'fecha_envio', 'numero_envios',
   'estatus_respuesta', 'fecha_respuesta'];
@@ -23,9 +24,14 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   dataSource = new MatTableDataSource<Envios>(this.datos);
 
-  constructor(private enviosService: EnviosService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private enviosService: EnviosService) { }
 
   ngOnInit() {
+    
+    empleado.empleadoId = this.activatedRoute.snapshot.params.empleado;
+    this.empleadoId = empleado.empleadoId;
+    console.log('ID Empleado desde el home component: ' + empleado.empleadoId);
     this.envios();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
