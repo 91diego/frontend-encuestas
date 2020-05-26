@@ -122,7 +122,7 @@
             </div>
         </div>
         <!-- FIN EDICION PREGUNTAS -->
-        <div *ngIf="preguntasEncuesta == null">
+        <div *ngIf="preguntasEncuesta.length < 1">
             <!-- AGREGAR PREGUNTA A LA ENCUESTA -->
             <div class="row">
                 <div class="col">
