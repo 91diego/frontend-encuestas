@@ -16,6 +16,7 @@ import { MatPaginatorModule, MatSortModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DetallesEncuestaComponent } from './detalles-encuesta/detalles-encuesta.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DetallesEncuestaComponent } from './detalles-encuesta/detalles-encuesta
     MenuComponent,
     HomeComponent,
     DetallesEncuestaComponent,
+    ReportesComponent,
   ],
   imports: [
     BrowserModule,
