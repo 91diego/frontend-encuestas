@@ -17,10 +17,16 @@
                     <th mat-header-cell *matHeaderCellDef> Encuesta</th>
                     <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
                   </ng-container>
-              
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="cliente">
+                    <th mat-header-cell *matHeaderCellDef> Cliente</th>
+                    <td mat-cell *matCellDef="let element"> {{element.cliente}} </td>
+                  </ng-container>  
+
                   <!-- Name Column -->
                   <ng-container matColumnDef="desarrollo">
-                    <th mat-header-cell *matHeaderCellDef> Cliente</th>
+                    <th mat-header-cell *matHeaderCellDef> Desarrollo</th>
                     <td mat-cell *matCellDef="let element"> {{element.desarrollo}} </td>
                   </ng-container>
               

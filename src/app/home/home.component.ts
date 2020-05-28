@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   empleadoId;
   datos: Envios[];
-  displayedColumns: string[] = ['nombre', 'desarrollo', 'estatus_envio', 'fecha_envio', 'numero_envios',
+  displayedColumns: string[] = ['nombre', 'cliente', 'desarrollo', 'estatus_envio', 'fecha_envio', 'numero_envios',
   'estatus_respuesta', 'fecha_respuesta'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
