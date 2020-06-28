@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Chart } from 'node_modules/chart.js';
+import { ExportarService } from './../services/exportar.service';
 
 @Component({
   selector: "app-reportes",
@@ -7,11 +8,28 @@ import { Chart } from 'node_modules/chart.js';
   styleUrls: ["./reportes.component.scss"],
 })
 export class ReportesComponent implements OnInit {
-  constructor() {}
+
+
+  dataSample: any = [{
+    eid: 'e101',
+    ename: 'ravi',
+    esal: 1000
+    },{
+    eid: 'e102',
+    ename: 'ram',
+    esal: 2000
+    },{
+    eid: 'e103',
+    ename: 'rajesh',
+    esal: 3000
+    }
+  ];
+
+  constructor(private exportarService: ExportarService) {}
 
   ngOnInit() {
 
-    var canvas = <HTMLCanvasElement> document.getElementById("myChart");
+    /*var canvas = <HTMLCanvasElement> document.getElementById("myChart");
     var ctx = canvas.getContext("2d");
 
     var ct = canvas.getContext("2d");
@@ -48,6 +66,25 @@ export class ReportesComponent implements OnInit {
           ],
         },
       },
-    });
+    });*/
+  }
+
+  /**
+   * Fecha: 2020.06.27
+   * Nombre: DIEGO GONZALEZ
+   * Descripcion: Funcion que realiza la peticion a la API
+   * para obtener la informacion de las encuestas.
+   * La funcion llama a exportAsExcekFile la cual es la encargada
+   * de generar el archivo.
+   */
+  exportar() {
+    
+    this.exportarService.expotarExcel().subscribe(
+      data => {
+
+        this.exportarService.exportAsExcelFile(data, 'reporte_ecuestas');
+      }
+    )
+    console.log('Export data');
   }
 }
