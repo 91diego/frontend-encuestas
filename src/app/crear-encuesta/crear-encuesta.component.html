@@ -1,3 +1,12 @@
+<!--
+  Documentacio
+
+  Fecha:        2020-09-08
+  Nombre:       Diego Gonzalez
+  Descripcion:  - Se agrega conjunto de radiobuttons para agregar opcion multiple a la pregunta.
+                - El check que estaba como opcion multiple se cambia a comentarios en opcion multiple.
+
+-->
 <div class="container">
     <br>
     <div class="card shadow p-4 mb-4 bg-white" id="datos-generales">
@@ -49,11 +58,26 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input formControlName="multiple" type="checkbox" class="custom-control-input" id="multiple">
-                                <label class="custom-control-label" for="multiple">Opcion multiple</label>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" formControlName="multiple" type="radio" name="multiple" id="multiple" value="1">
+                              <label class="form-check-label" for="multiple">Opcion multiple, Si / No</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" formControlName="multiple" type="radio" name="multiple" id="multiple_varias" value="2">
+                              <label class="form-check-label" for="multiple_varias">Opcion multiple, varias respuestas</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" formControlName="multiple" type="radio" name="multiple" id="na" value="0" checked>
+                              <label class="form-check-label" for="na">No aplica</label>
                             </div>
                         </div>
+                        <div class="form-group">
+                          <div class="custom-control custom-checkbox">
+                              <input formControlName="comentarios_multiple" type="checkbox" class="custom-control-input" id="comentarios_multiple" name="comentarios_multiple">
+                              <label class="custom-control-label" for="comentarios_multiple">Agregar comentarios en opción múltiple</label>
+                          </div>
+                      </div>
+
                         <div class="row">
                             <button [disabled]="formPreguntas.invalid" type="submit" class="btn btn-outline-success">Agregar pregunta</button>&nbsp;
                             <button [disabled]="formPreguntas.invalid" type="submit" class="btn btn-outline-info">Finalizar asignación</button>
@@ -68,25 +92,25 @@
                     <div *ngIf="pregunta == null">
                         <h3 class="text-center text-info text-uppercase">Sin preguntas asociadas a la encuesta</h3>
                     </div>
-                    <div *ngIf="pregunta != null" class="table-responsive">
-                        <table class="table table-hover table-sm">
+                    <div *ngIf="pregunta != null" class="">
+                        <table class="table table-hover table-sm table-responsive text-center">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Pregunta</th>
-                                    <th class="text-center">Opción Múltiple</th>
-                                    <th class="text-center">Medición</th>
+                                    <th>Pregunta</th>
+                                    <th>Opción Múltiple</th>
+                                    <th>Medición</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let p of pregunta">
-                                    <td class="text-center">{{p.descripcion}}</td>
+                                    <td>{{p.descripcion}}</td>
                                     <div *ngIf="p.multiple">
-                                        <td class="text-center">SI</td>
+                                        <td>SI</td>
                                     </div>
                                     <div *ngIf="!p.multiple">
-                                        <td class="text-center">NO</td>
+                                        <td>NO</td>
                                     </div>
-                                    <td class="text-center">{{p.medicion}}</td>
+                                    <td>{{p.medicion}}</td>
                                 </tr>
                             </tbody>
                         </table>

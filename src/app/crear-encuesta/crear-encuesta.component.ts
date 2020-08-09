@@ -1,3 +1,12 @@
+/**
+ * Documentacion
+ *
+ * Fecha:         2020.09.08
+ * Nombre:        Diego Gonzalez
+ * Descripcion:   - Se agrega el elemento comentarios_multiple al formGroup formPreguntas en las funciones buildForm() y
+ *                reiniciarFormPreguntas().
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EncuestasService } from './../services/encuestas.service';
@@ -82,7 +91,6 @@ export class CrearEncuestaComponent implements OnInit {
 
     // VALIDACION DEL FORMULARIO PARA GUARDAR DATOS
     if (this.formPreguntas.valid) {
-
       this.preguntasService.crearPreguntas(this.formPreguntas.value)
       .subscribe(pregunta => {
         console.log(pregunta);
@@ -153,7 +161,8 @@ export class CrearEncuestaComponent implements OnInit {
     this.formPreguntas = this.formBuilder.group({
 
       pregunta: ['', [Validators.required]],
-      multiple: [false],
+      comentarios_multiple: [false, [Validators.required]],
+      multiple: ['0'],
       medicion: ['', [Validators.required]],
       encuesta_id: 0
     });
@@ -166,10 +175,10 @@ export class CrearEncuestaComponent implements OnInit {
     this.formPreguntas = this.formBuilder.group({
 
       pregunta: ['', [Validators.required]],
-      multiple: [false],
+      comentarios_multiple: [false, [Validators.required]],
+      multiple: ['0'],
       medicion: ['', [Validators.required]],
       encuesta_id: this.idEncuesta
     });
   }
-
 }
